@@ -1,6 +1,6 @@
 /* ribbon customer wallet & discount */
 .ribbon {
- font-size: 16px !important;
+ font-size: 20px !important;
 
  width: 50%;
 
@@ -49,4 +49,71 @@
 .customer-wallet .wallet-details {
     display:  flex;
     justify-content: space-between;
+}
+
+/* other info */
+
+p.no-of-order {
+    background: white;
+    padding:  8px 5px;
+    border-radius:  1px;
+    font-weight: bold;
+}
+
+/* p.total-spent {
+    background: white;
+    padding:  8px 5px;
+    font-weight:  bold;
+} */
+/* balance credits */
+.wallet-details .avatar {
+    border: 2px solid #ea8161;
+}
+
+.total-spent {
+    display:  flex;
+    justify-content: space-around;
+    padding: 10px 5px;
+    font-weight:  bold;
+    color:  white;
+    background: #428bca;
+    margin: 20px 0;
+}
+
+.total-spent span {
+    font-size: 20px;
+}
+
+.total-order {
+    display:  flex;
+    justify-content: space-around;
+    padding: 10px 5px;
+    font-weight:  bold;
+    color:  white;
+    background: #428bca;
+}
+
+.total-order span {
+    font-size: 20px;
+}
+.customer-balance {
+    border: 2px dashed #ea8161;
+    padding:  35px;
+    font-size: 25px;
+    text-align:  center;
+    color: #554946;
+}
+.customer-balance span {
+    font-size: 35px;
+    color: #ea8161;
+}
+.customer-badge i {
+    font-size: 94px;
+    color: #ea8161;
+}
+
+/* customer wallet padding */
+.customer-wallet {
+    margin-top: -35px;
+    margin-bottom: 50px;
 }

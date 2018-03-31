@@ -36,6 +36,7 @@ class Customer_Wallet_Discount {
     public function load_customer_wallet_discount_scripts() {
         if ( ! is_account_page() ) return;
 
+        wp_enqueue_style( 'fontawesome', "https://use.fontawesome.com/releases/v5.0.9/css/all.css" );
         wp_enqueue_style( 'customer-wallet-discount', CWD_ASSETS . 'css/style.css' );
     }
 
