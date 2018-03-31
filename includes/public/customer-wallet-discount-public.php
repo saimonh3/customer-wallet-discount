@@ -18,6 +18,7 @@ class Customer_Wallet_Discount_Public {
 
     public function customer_discount_details() {
         $customer = new WC_Customer( get_current_user_id() );
+        $customer_credits = get_user_meta( get_current_user_id(), 'cwd_credits', true );
         ?>
         <div class="customer-wallet">
             <h2 class="ribbon">
@@ -28,7 +29,7 @@ class Customer_Wallet_Discount_Public {
                     <img src="<?php echo $customer->get_avatar_url() ?>" alt="Customer Avatar">
                 </div>
                 <div class="customer-balance">
-                    <?php printf( __( 'Credits: <span>$</span>%s', 'domain' ), $customer->get_total_spent() ); ?>
+                    <?php printf( __( 'Credits: %s', 'domain' ), wc_price( esc_attr__( $customer_credits, 'domain' ) ) ); ?>
                 </div>
                 <div class="customer-badge">
                     <i class="far fa-gem"></i>
@@ -49,20 +50,16 @@ class Customer_Wallet_Discount_Public {
             </div>
         </div>
         <?php
-
-        // $html = '<div class="customer-discount">';
-        // $html .= '<h2> Your Discount </h2>';
-        // $html .= '<h3> You are a lite user </h3>';
-        // $html .= '<p> Total Orders: ' . wc_get_customer_order_count( get_current_user_id() ) . '</p>';
-        // $html .= '<p> Total Spent: ' . wc_get_customer_total_spent( get_current_user_id() ) . '</p>';
-        // $html .= '<p> You will get $50 discount when your total spent will be greater than $500';
-        // $html .= '</div>';
-        //
-        // echo $html;
     }
 
     public function give_credits_on_customer_registration( $user_id, $data ) {
-        error_log('customer crated');
+        if ( $data['role'] !== 'customer' ) return;
+
+        $cwd_credits = get_option( 'credits_on_registration', 0 );
+
+        if ( empty( $cwd_credits ) ) return;
+
+        update_user_meta( $user_id, 'cwd_credits', wc_clean( $cwd_credits ) );
     }
 
     public static function init() {
