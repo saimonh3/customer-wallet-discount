@@ -2,7 +2,7 @@
 
 if ( ! defined( 'WPINC' ) ) exit;
 
-class Customer_Discount_Public {
+class Customer_Wallet_Discount_Public {
     public static $instance = null;
 
     public function __construct() {
@@ -11,6 +11,9 @@ class Customer_Discount_Public {
 
     public function init_hooks() {
         add_action( 'woocommerce_account_content', array( $this, 'customer_discount_details' ), 1 );
+
+        // give credits on customer registration
+        add_action( 'woocommerce_created_customer', array( $this, 'give_credits_on_customer_registration' ), 10, 2 );
     }
 
     public function customer_discount_details() {
@@ -34,12 +37,15 @@ class Customer_Discount_Public {
             <div class="other-info">
                 <div class="total-spent">
                     Total Spent
-                    <span>$55</span>
+                    <span><?php echo $customer->get_total_spent(); ?></span>
                 </div>
                 <div class="total-order">
                     Total Order
-                    <span>55</span>
+                    <span><?php echo $customer->get_order_count(); ?></span>
                 </div>
+            </div>
+            <div class="customer-message">
+                Get 1 Credit Per Order or Per $50 Spent.
             </div>
         </div>
         <?php
@@ -55,6 +61,10 @@ class Customer_Discount_Public {
         // echo $html;
     }
 
+    public function give_credits_on_customer_registration( $user_id, $data ) {
+        error_log('customer crated');
+    }
+
     public static function init() {
         if ( is_null( self::$instance ) ) {
             self::$instance = new Self;
@@ -64,4 +74,4 @@ class Customer_Discount_Public {
     }
 }
 
-Customer_Discount_Public::init();
+Customer_Wallet_Discount_Public::init();

@@ -42,9 +42,9 @@ class Customer_Wallet_Discount {
 
     public function includes() {
         if ( is_admin() ) {
-
+            require_once CWD_INC . 'admin/customer-wallet-discount-settings.php';
         } else {
-            require_once CWD_INC . 'public/customer-discount-public.php';
+            require_once CWD_INC . 'public/customer-wallet-discount-public.php';
         }
 
     }
