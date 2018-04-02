@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Customer Wallet & Discount
- * Plugin URI: www.saimonsplugins.com
- * Author: Mohammed saimon
- * Description: A simple plugin
- */
+* Plugin Name: Customer Wallet & Discount
+* Plugin URI: www.saimonsplugins.com
+* Author: Mohammed saimon
+* Description: A simple plugin
+*/
 
 if ( ! defined( 'WPINC' ) ) exit;
 

@@ -22,7 +22,7 @@ class Customer_Wallet_Discount_Public {
         ?>
         <div class="customer-wallet">
             <h2 class="ribbon">
-               <strong class="ribbon-content">Your Wallet</strong>
+                <strong class="ribbon-content">Your Wallet</strong>
             </h2>
             <div class="wallet-details">
                 <div class="avatar">

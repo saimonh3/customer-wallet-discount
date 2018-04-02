@@ -44,12 +44,12 @@ class Customer_Wallet_Discount_Settings {
                 'default'   => '0'
             ),
 
-	        array(
+            array(
                 'type'   => 'sectionend',
                 'id' => 'customer_wallet_settings'
             ),
         );
-
+        
         return $settings;
     }
 
