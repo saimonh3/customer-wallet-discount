@@ -14,11 +14,16 @@ class Customer_Wallet_Discount_Public {
 
         // give credits on customer registration
         add_action( 'woocommerce_created_customer', array( $this, 'give_credits_on_customer_registration' ), 10, 2 );
+        // give credits on a new order
+        // add_action( 'woocommerce_payment_complete', array( $this, 'give_credits_on_new_order' ) );
+        add_action( 'woocommerce_order_status_on-hold', array( $this, 'give_credits_on_new_order' ) );
+        add_action( 'woocommerce_order_status_pending', array( $this, 'give_credits_on_new_order' ) );
+        add_action( 'woocommerce_order_status_completed', array( $this, 'give_credits_on_new_order' ) );
     }
 
     public function customer_discount_details() {
         $customer = new WC_Customer( get_current_user_id() );
-        $customer_credits = get_user_meta( get_current_user_id(), 'cwd_credits', true );
+        $customer_credits = $this->get_credits();
         ?>
         <div class="customer-wallet">
             <h2 class="ribbon">
@@ -60,6 +65,37 @@ class Customer_Wallet_Discount_Public {
         if ( empty( $cwd_credits ) ) return;
 
         update_user_meta( $user_id, 'cwd_credits', wc_clean( $cwd_credits ) );
+    }
+
+    public function give_credits_on_new_order( $order_id ) {
+        $credit_on_order_enabled = get_option( 'credit_on_order_enabled', 0 );
+        $credit_on_order_total_enabled = get_option( 'credit_on_order_total_enabled', 0 );
+
+        if ( ! $credit_on_order_enabled && ! $credit_on_order_total_enabled ) {
+            return;
+        }
+
+        $customer_id      = get_current_user_id();
+        $current_credits  = $this->get_current_credits( $customer_id );
+
+        update_user_meta( $customer_id, 'cwd_credits', wc_clean( $current_credits ) );
+
+        do_action( 'give_credits_on_new_order', $order_id );
+    }
+
+    public function get_current_credits( $user_id ) {
+        $credits = get_user_meta( $user_id, 'cwd_credits', true );
+        $credit_per_order = get_option( 'credit_per_order' );
+
+        $total_credits = $credit_per_order + $credits;
+
+        return $total_credits;
+    }
+
+    public function get_credits() {
+        $credits = get_user_meta( get_current_user_id(), 'cwd_credits', true );
+
+        return $credits;
     }
 
     public static function init() {
