@@ -49,7 +49,7 @@ class Customer_Wallet_Discount_Settings {
                 'id' => 'customer_wallet_settings'
             ),
         );
-        
+
         return $settings;
     }
 
