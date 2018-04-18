@@ -6,7 +6,7 @@
 * Description: A simple plugin
 */
 
-if ( ! defined( 'WPINC' ) ) exit
+if ( ! defined( 'WPINC' ) ) exit;
 
 class Customer_Wallet_Discount {
     public static $version;
